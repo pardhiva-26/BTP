@@ -111,6 +111,10 @@ This setup simulates:
 
 ---
 
+## Requirements
+
+Please run `requirements.txt` to get the required modules.
+
 ## Datasets
 
 For training data, please refer to the official MoCheg GitHub repository and download the required benchmark dataset and pretrained checkpoints as specified in their setup instructions.
