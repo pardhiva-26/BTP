@@ -18,7 +18,7 @@ class StanceDetectionLayer(torch.nn.Module):
         
     
     def forward(self,  claim_embed,txt_evidences_embed,img_evidences_embed,has_image,claim_mask,txt_evidence_mask,img_evidence_mask):
-        stance_embed=torch.tensor([],device=claim_embed.device)
+        stance_embed=torch.tensor([],device=claim_embed.get_device())
         if self.model_type_enum.use_text_evidence:
             text_stance_embed=self.init_stance_embed(claim_embed,txt_evidences_embed)
             stance_embed=torch.cat([stance_embed,text_stance_embed],0)
@@ -51,7 +51,7 @@ class StanceDetectionLayer3(torch.nn.Module):
         
     
     def forward(self,  claim_embed,txt_evidences_embed,img_evidences_embed,has_image,claim_mask,txt_evidence_mask,img_evidence_mask):
-        stance_embed=torch.tensor([],device=claim_embed.device)
+        stance_embed=torch.tensor([],device=claim_embed.get_device())
         if self.model_type_enum.use_text_evidence:
             text_stance_embed=self.init_stance_embed(claim_embed,txt_evidences_embed)
             stance_embed=torch.cat([stance_embed,text_stance_embed],0)
@@ -84,7 +84,7 @@ class StanceDetectionLayer2(torch.nn.Module):
         self.dropout = nn.Dropout(0.3)
         
     def forward(self,  claim_embed,txt_evidences_embed,img_evidences_embed,has_image,claim_mask,txt_evidence_mask,img_evidence_mask):
-        stance_embed=torch.tensor([],device=claim_embed.device)
+        stance_embed=torch.tensor([],device=claim_embed.get_device())
         if self.model_type_enum.use_text_evidence:
             stance_embed=torch.cat([stance_embed,txt_evidences_embed],0)
         if self.model_type_enum.use_image_evidence and has_image:
@@ -152,7 +152,7 @@ class BertMultiwayMatch(torch.nn.Module):
         return new_p_max
 
     def forward(self,  claim_encoded, text_evidence_encoded, image_evidence_encoded, has_image,claim_mask,txt_evidence_mask,img_evidence_mask):
-        stance_embed=torch.tensor([],device=claim_encoded.device)
+        stance_embed=torch.tensor([],device=claim_encoded.get_device())
         if self.model_type_enum.use_text_evidence:
             text_stance_embed=self.gen_stance (   claim_encoded, text_evidence_encoded, claim_mask,txt_evidence_mask,True)
             stance_embed=torch.cat([stance_embed,text_stance_embed],0)
@@ -205,7 +205,7 @@ class BertMultiwayMatch2(BertMultiwayMatch):
 
 
     def forward(self,  claim_encoded, text_evidence_encoded, image_evidence_encoded, has_image,claim_mask,txt_evidence_mask,img_evidence_mask):
-        stance_embed=torch.tensor([],device=claim_encoded.device)
+        stance_embed=torch.tensor([],device=claim_encoded.get_device())
         if self.model_type_enum.use_text_evidence:
             text_stance_embed=self.gen_stance (   claim_encoded, text_evidence_encoded, claim_mask,txt_evidence_mask,True)
             stance_embed=torch.cat([stance_embed,text_stance_embed],-1)

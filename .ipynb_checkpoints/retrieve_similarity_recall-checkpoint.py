@@ -20,7 +20,7 @@ import numpy as np
 @click.pass_context
 @click.option('--outdir', help='Where to save the results', required=True, metavar='DIR',default="retrieval/output/runs")
 @click.option('--csv_out_dir', help='Where to save the results',   metavar='DIR' )
-@click.option('--in_dir', help='input', required=True, metavar='DIR',default="/scratch/sg/nagendra/Mocheg/data/test")
+@click.option('--in_dir', help='input', required=True, metavar='DIR',default="/home/menglong/workspace/code/referred/conll2019-snopes-crawling/final_corpus/mocheg2/test")
 # @click.option('--in_dir', help='input', required=True, metavar='DIR',default="/home/menglong/workspace/code/referred/conll2019-snopes-crawling/final_corpus/mode3_latest_v2")
 @click.option('--top_k', help='top_k', type=int,default=5, metavar='INT')#TODO 10
 @click.option('--metric', type=str,default="similarity" )  
