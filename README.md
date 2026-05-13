@@ -110,3 +110,12 @@ This setup simulates:
 - persuasive synthetic media content
 
 ---
+
+## Datasets
+
+For training data, please refer to the official MoCheg GitHub repository and download the required benchmark dataset and pretrained checkpoints as specified in their setup instructions.
+
+For evaluation and testing, the synthetic dataset created as part of this project has been provided in the uploaded folder named `data`.
+
+## To run
+Use the provided train_new.sh script to train all modules of the multimodal fact-checking framework with the configured hyperparameters.
