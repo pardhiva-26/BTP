@@ -118,4 +118,4 @@ For training data, please refer to the official MoCheg GitHub repository and dow
 For evaluation and testing, the synthetic dataset created as part of this project has been provided in the uploaded folder named `data`.
 
 ## To run
-Use the provided train_new.sh script to train all modules of the multimodal fact-checking framework with the configured hyperparameters.
+Use the provided `train_new.sh` script to train and test all modules of the multimodal fact-checking framework with the configured hyperparameters.
