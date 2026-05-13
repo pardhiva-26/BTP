@@ -1,106 +1,112 @@
->📋  End-to-End Multimodal Fact-Checking and Explanation Generation: A Challenging Dataset and Models
+# AI-Generated Misinformation Detection using Multimodal Fact Checking
 
-# End-to-End Multimodal Fact-Checking and Explanation Generation: A Challenging Dataset and Models
+## Project Overview
 
-This repository is the official implementation of [End-to-End Multimodal Fact-Checking and Explanation Generation: A Challenging Dataset and Models](https://arxiv.org/abs/2205.12487). [Best Paper Honorable Mention at SIGIR 2023](https://sigir.org/sigir2023/program/best-paper-award/). 
+This project focuses on evaluating the robustness of multimodal fact-checking systems against synthetically generated misinformation. The work builds upon an end-to-end multimodal fact-checking framework consisting of evidence retrieval, claim verification, and explanation generation.
 
-Please use the following citation:
-```
-@inproceedings{10.1145/3539618.3591879,
-author = {Yao, Barry Menglong and Shah, Aditya and Sun, Lichao and Cho, Jin-Hee and Huang, Lifu},
-title = {End-to-End Multimodal Fact-Checking and Explanation Generation: A Challenging Dataset and Models},
-year = {2023},
-isbn = {9781450394086},
-publisher = {Association for Computing Machinery},
-address = {New York, NY, USA},
-url = {https://doi.org/10.1145/3539618.3591879},
-doi = {10.1145/3539618.3591879},
-booktitle = {Proceedings of the 46th International ACM SIGIR Conference on Research and Development in Information Retrieval},
-pages = {2733–2743},
-numpages = {11},
-keywords = {explainable fact-checking, multimodal fact-checking, explanation generation, evidence retrieval, stance detection},
-location = {Taipei, Taiwan},
-series = {SIGIR '23}
-}
-```
-<!-- >📋  Optional: include a graphic explaining your approach/main result, bibtex entry, link to demos, blog posts and tutorials -->
+Traditional misinformation detection systems are generally trained on real-world fact-checking datasets containing claims, evidence, and veracity labels. However, with the emergence of large language models, highly realistic synthetic misinformation can now be generated at scale, including fabricated claims, persuasive news reports, official-sounding statements, temporal details, and contextual descriptions.
 
-## Requirements
+The objective of this project is to simulate such AI-generated misinformation scenarios and evaluate how an existing multimodal fact-checking pipeline performs under these adversarial conditions.
 
-To install requirements:
+---
 
-```setup
-conda create -n mocheg python=3.8.10
-conda install pytorch==1.9.0 torchvision==0.10.0 torchaudio==0.9.0 cudatoolkit=10.2 -c pytorch
-pip install -r requirements.txt
-```
+## Project Objectives
 
-<!-- >📋  Describe how to set up the environment, e.g. pip/conda/docker commands, download datasets, etc... -->
+- Study multimodal misinformation detection using retrieval, verification, and explanation generation.
+- Generate synthetic fake news claims using prompting strategies.
+- Simulate realistic misinformation campaigns with AI-generated narratives.
+- Evaluate the robustness of fact-checking pipelines against synthetic misinformation.
+- Compare performance between real benchmark data and synthetic adversarial data.
+- Analyse weaknesses in retrieval, verification, and explanation generation modules.
 
+---
 
-## Dataset - MOCHEG
+## System Architecture
 
-You can download dataset here:
+The overall system consists of three major components:
 
-- [MOCHEG version 1](https://docs.google.com/forms/d/e/1FAIpQLScAGehM6X9ARZWW3Fgt7fWMhc_Cec6iiAAN4Rn1BHAk6KOfbw/viewform?usp=sf_link). 
+### 1. Evidence Retrieval
+This module retrieves relevant evidence for a given claim from multimodal information sources.
 
-- Dataset Format and structure are explained in document/MOCHEG_dataset_statement.pdf.
+**Text Retrieval**
+- Semantic text retrieval
+- Dense embedding similarity search
+- Re-ranking for improved relevance
 
-## Pre-trained Models
+**Image Retrieval**
+- Cross-modal text-image retrieval
+- Vision-language embedding matching
 
-You can download pretrained models here:
+**Evaluation Metrics**
+- Recall@K
+- Precision@K
+- NDCG
+- MAP
+- Success Recall
 
-- [pretrained models](http://nlplab1.cs.vt.edu/~menglong/project/multimodal/fact_checking/MOCHEG/checkpoint) trained on MOCHEG. 
+---
 
-## Evaluation
+### 2. Claim Verification
+This module performs stance verification between the claim and retrieved evidence.
 
-To evaluate models on MOCHEG, run:
+Possible outputs:
+- Supported
+- Refuted
+- Not Enough Information (NEI)
 
-```eval
-bash eval.sh
-```
- 
------------------------------------------------------------------------------------------
+The verification component uses multimodal fusion between textual and visual evidence for stance prediction.
 
+**Evaluation Metrics**
+- F1 Score
+- Precision
+- Recall
+- Confusion Matrix Analysis
 
-## Training (Optional)
+---
 
-If you want to train models by yourself, run this command:
+### 3. Explanation Generation
+This module generates human-readable explanations for the predicted verdict.
 
-```train
-bash train.sh
-```
-<!-- 
->📋  Describe how to train the models, with example commands on how to train the models in your paper, including the full training procedure and appropriate hyperparameters. -->
+Input:
+- Claim
+- Retrieved evidence
+- Predicted truthfulness label
 
-## Dataset Build (Optional)
+Output:
+- Fact-check style explanation
 
-If you want to build dataset by yourself, run this command:
+The explanation generator is implemented using transformer-based sequence-to-sequence generation.
 
-```build_dataset
-bash build_dataseth.sh
-``` 
+**Evaluation Metrics**
+- ROUGE-1
+- ROUGE-2
+- ROUGE-L
+- BLEU
+- BERTScore
 
-<!-- ## Results
+---
 
-Our model achieves the following performance on :
+## Synthetic Dataset Generation
 
-### [Image Classification on ImageNet](https://paperswithcode.com/sota/image-classification-on-imagenet)
+A synthetic misinformation dataset was created to evaluate model robustness.
 
-| Model name         | Top 1 Accuracy  | Top 5 Accuracy |
-| ------------------ |---------------- | -------------- |
-| My awesome model   |     85%         |      95%       |
+### Dataset Creation Strategy
 
->📋  Include a table of results from your paper, and link back to the leaderboard for clarity and context. If your main result is a figure, include that figure and link to the command or notebook to reproduce it.  -->
+Synthetic claims were generated using structured prompting with large language models.
 
+Prompting objectives included:
+- realistic fake news claim creation
+- inclusion of dates, locations, and timelines
+- official-sounding quotes
+- expert statements
+- government responses
+- professional journalistic tone
+- persuasive misinformation narratives
 
+This setup simulates:
+- AI-generated propaganda
+- coordinated misinformation campaigns
+- fabricated journalism
+- persuasive synthetic media content
 
-## Credit: 
-
-This repository was build by [Barry Menglong Yao](https://barry-yao.netlify.app/), Aditya Shah.
-
-The data crawler scripts are based on [conll2019-snopes-crawling](https://github.com/UKPLab/conll2019-snopes-crawling).
-
-## Contributing
-
->📋  Our dataset is licensed under the [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The associated codes are licensed under [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+---
